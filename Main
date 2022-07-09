@@ -1,0 +1,50 @@
+# Write your code here
+print("H A N G M A N")
+menu = "play"
+win, lose = 0, 0
+while menu != "exit":
+    menu = input('Type "play" to play the game, "results" to show the scoreboard, and "exit" to quit:')
+    if menu == "play": 
+        L = ['python', 'java', 'swift', 'javascript']
+        import random
+        i = random.randint(0, 3)
+        word = L[i]
+        n = len(word)
+        word_new = "-" * n
+        list_word_new = list(word_new)
+        counter = 8
+        list_letter = []
+        while counter != 0:
+            print()
+            print(word_new)
+            letter = input("Input a letter:")
+            if len(letter) != 1:
+                print("Please, input a single letter.")
+            elif letter.isalpha() == False or letter.islower() == False:
+                print("Please, enter a lowercase letter from the English alphabet.")
+            else:
+                list_letter.append(letter)
+                if list_letter.count(letter) > 1:
+                    print("You've already guessed this letter.")
+                elif letter in word:
+                    R = []
+                    for r in range(n):
+                        if word[r] == letter:
+                            R.append(r)
+                            for d in R:
+                                list_word_new[d] = letter
+                                word_new = "".join(list_word_new)
+                            if word_new == word:
+                                print("You guessed the word " + word + "!")
+                                print("You survived!")
+                                win += 1
+                                counter = 0
+                else:
+                    print("That letter doesn't appear in the word.")
+                    counter -= 1
+        if word_new != word:
+            print("You lost!")
+            lose += 1
+    elif menu == "results":
+        print("You won: " + str(win) + " times.")
+        print("You lost: " + str(lose) + " times.")
